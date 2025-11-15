@@ -6,8 +6,8 @@ HEIGHT=600
 CENTRE_X=WIDTH/2
 CENTRE_Y=HEIGHT/2
 CENTRE=(CENTRE_X,CENTRE_Y)
-FINAL_LEVEL=10
-STARTSPEED=10
+FINAL_LEVEL=30
+STARTSPEED=50
 ITEMS=["battery","chips","bottle","plastic"]
 gameover=False
 gamecomplete=False
@@ -30,7 +30,7 @@ def draw():
 def update():
     global items
     if len(items)==0:
-        item=make_items(currentlevel)
+        items=make_items(currentlevel)
 
 def make_items(number_of_extra_items):
     items_to_create=get_option_to_create(number_of_extra_items)
@@ -93,10 +93,12 @@ def handle_game_complete():
         animations=[]
 
 def stop_animations(animations_to_stop):
-    pass
+    for animation in animations_to_stop:
+        if animation.running:
+            animation.stop()
 
 def display_message(heading_text,sub_heading_text):
-    pass
+    screen.draw.text(heading_text,fontsize=60,center=CENTRE,color="red")
+    screen.draw.text(sub_heading_text,fontsize=30,center=(CENTRE_X,CENTRE_Y+50),color="yellow")
 
 pgzrun.go()
-
